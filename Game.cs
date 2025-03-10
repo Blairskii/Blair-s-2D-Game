@@ -42,7 +42,9 @@ public class Game
         // Draw a player graphic to the screen at position (200, 100).
 
         Texture2D player = Graphics.LoadTexture("C:.\\bear-walk1.png");// Load Player Image
-        Texture2D player2 = Graphics.LoadTexture("C:.\\bear-walk3.png");// Load Player Image
+        Texture2D player2 = Graphics.LoadTexture("C:.\\bear-walk2.png");// Load Player Image
+        Texture2D player3 = Graphics.LoadTexture("C:.\\bear-walk3.png");// Load Player Image
+        Texture2D player4 = Graphics.LoadTexture("C:.\\bear-walk4.png");// Load Player Image
 
         {
             if (Input.IsKeyboardKeyDown(KeyboardInput.Left))
