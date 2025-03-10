@@ -12,8 +12,9 @@ namespace MohawkGame2D;
 /// </summary>
 public class Game
 {
-    float playerspeed = 5;
-    float playerVelocity = 3;
+    float playerX = 50;
+    float playerY = 350;
+    float playerSpeed = 2f;
 
     /// <summary>
     ///     Setup runs once before the game loop begins.
@@ -26,6 +27,9 @@ public class Game
         Window.TargetFPS = 60;//Set Target FPS
     }
 
+
+
+
     /// <summary>
     ///     Update runs every frame.
     /// </summary>
@@ -37,35 +41,32 @@ public class Game
         Graphics.Scale = 1.3f;
         Graphics.Draw(bg, 0, 0);
         // Draw Rectangle as ground plane 
-        
+
         // Draw a player graphic to the screen at position (200, 100).
+
+        Texture2D player = Graphics.LoadTexture("C:.\\bear-walk3.png");// Load Player Image
         {
-            Texture2D player = Graphics.LoadTexture("C:.\\bear-walk3.png");// Load Player Image
-            Graphics.Draw(player, 50, 350);// Draw Player Image
             if (Input.IsKeyboardKeyDown(KeyboardInput.Left))
             {
-                playerVelocity = -playerspeed;
+                playerX -= playerSpeed;
             }
             else if (Input.IsKeyboardKeyDown(KeyboardInput.Right))
             {
-                playerVelocity = -playerspeed;
+                playerX += playerSpeed;
             }
             else if (Input.IsKeyboardKeyDown(KeyboardInput.Up))
             {
-                playerVelocity = -playerspeed;
+                playerY -= playerSpeed;
             }
             else if (Input.IsKeyboardKeyDown(KeyboardInput.Down))
             {
-                playerVelocity = -playerspeed;
+                playerY += playerSpeed;
             }
-            else
-            {
-                playerVelocity = 0;
-            }
+
+            Graphics.Draw(player, playerX, playerY);// Draw Player Image
         }
-        //
-        
-        
+
+
+
     }
 }
-
