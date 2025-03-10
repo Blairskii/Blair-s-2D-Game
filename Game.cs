@@ -10,8 +10,14 @@ public class Game
 {
     float playerX = 50;
     float playerY = 350;
-    float playerSpeed = 5f;
-    float DeltaTime = 5f;   
+    float playerSpeed = 7f;
+    float DeltaTime = 5f;
+    int currentFrame = 0; // Current Frame
+    float frameTime = 5f; // Time per Frame
+    float frameTimer = 0f; // Timer for Frame
+
+    int windowWidth = 500;
+    int windowHeight = 500;
 
     /// <summary>
     ///     Setup runs once before the game loop begins.
@@ -21,21 +27,17 @@ public class Game
     {
         Window.SetTitle("Blair's 2D Game");//Set Title
         Window.SetSize(500, 500);//Set Window Size
-        Window.TargetFPS = 60;//Set Target FPS
+        Window.TargetFPS = 30;//Set Target FPS
     }
-
-
-
-
     /// <summary>
     ///     Update runs every frame.
     /// </summary>
     public void Update()
     {
         //insert Background Image
-        Window.ClearBackground(Color.Clear);
+
         Texture2D bg = Graphics.LoadTexture("C:.\\image001.png");
-        Graphics.Scale = 1.3f;
+        Graphics.Scale = 1.3f; // Scale Background Image
         Graphics.Draw(bg, 0, 0);
         // Draw Rectangle as ground plane 
 
@@ -45,6 +47,7 @@ public class Game
         Texture2D player2 = Graphics.LoadTexture("C:.\\bear-walk2.png");// Load Player Image
         Texture2D player3 = Graphics.LoadTexture("C:.\\bear-walk3.png");// Load Player Image
         Texture2D player4 = Graphics.LoadTexture("C:.\\bear-walk4.png");// Load Player Image
+
 
         {
             if (Input.IsKeyboardKeyDown(KeyboardInput.Left))
@@ -64,11 +67,43 @@ public class Game
                 playerY += playerSpeed;
             }
 
-            Graphics.Draw(player, playerX, playerY);// Draw Player Image
-            Window.ClearBackground(Color.Clear);
-            Graphics.Draw(player2, playerX, playerY);// Draw Player Image
+            //
+            frameTimer += DeltaTime; // Add DeltaTime to FrameTimer
 
-        }
+            if (frameTimer >= frameTime)
+            {
+                frameTimer = 0; // Reset FrameTimer
+                currentFrame++; // Change Frame
+                
+
+                if (currentFrame > 3) 
+                {
+
+                    currentFrame = 0;
+                }
+                // if player goes beyond the screen, wrap around
+                if (playerX > Window.Width)
+                {
+                    playerX = 0;
+                }
+                else if (playerX < 0)
+                {
+                    playerX = Window.Width;
+                }
+                Texture2D currentPlayerTexture = currentFrame switch// Switch Statement for Current Frame
+                 { 
+                    0 => player, //
+                    1 => player2,
+                    2 => player3,
+                    3 => player4,
+                    _ => player
+                };
+
+                Graphics.Draw(currentPlayerTexture, playerX, playerY);// Draw Player Image
+                Window.ClearBackground(Color.Clear);
+
+
+            } }
 
 
 
