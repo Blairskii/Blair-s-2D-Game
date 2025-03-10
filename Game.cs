@@ -1,12 +1,8 @@
 ﻿// Include the namespaces (code libraries) you need below.
 using System;
 using System.Numerics;
-
-
-
 // The namespace your code is in.
 namespace MohawkGame2D;
-
 /// <summary>
 ///     Your game code goes inside this class!
 /// </summary>
@@ -14,7 +10,8 @@ public class Game
 {
     float playerX = 50;
     float playerY = 350;
-    float playerSpeed = 2f;
+    float playerSpeed = 5f;
+    float DeltaTime = 5f;   
 
     /// <summary>
     ///     Setup runs once before the game loop begins.
@@ -44,7 +41,9 @@ public class Game
 
         // Draw a player graphic to the screen at position (200, 100).
 
-        Texture2D player = Graphics.LoadTexture("C:.\\bear-walk3.png");// Load Player Image
+        Texture2D player = Graphics.LoadTexture("C:.\\bear-walk1.png");// Load Player Image
+        Texture2D player2 = Graphics.LoadTexture("C:.\\bear-walk3.png");// Load Player Image
+
         {
             if (Input.IsKeyboardKeyDown(KeyboardInput.Left))
             {
@@ -64,6 +63,9 @@ public class Game
             }
 
             Graphics.Draw(player, playerX, playerY);// Draw Player Image
+            Window.ClearBackground(Color.Clear);
+            Graphics.Draw(player2, playerX, playerY);// Draw Player Image
+
         }
 
 
