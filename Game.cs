@@ -1,5 +1,6 @@
 ﻿// Include the namespaces (code libraries) you need below.
 using System;
+using System.IO;
 using System.Numerics;
 
 
@@ -29,7 +30,18 @@ public class Game
     bool isGrounded = false;// Is Grounded
 
     //
-    
+    struct Platform
+    {
+        public float x,y, width, height;
+
+        public Platform(float x, float y, float width, float height)
+        {
+            this.x = x;
+            this.y = y;
+            this.width = width;
+            this.height = height;
+        }
+    }
 
     /// <summary>
     ///     Setup runs once before the game loop begins.
@@ -48,23 +60,29 @@ public class Game
     {
         //insert Background Image
 
-        Texture2D bg = Graphics.LoadTexture("C:.\\image001.png");
+        Texture2D bg = Graphics.LoadTexture("../../../Assets/image001.png");
         Graphics.Scale = 1.3f; // Scale Background Image
         Graphics.Draw(bg, 0, 0);
         // Draw Rectangle as ground plane 
 
         // Draw a player graphic to the screen at position (200, 100).
-
-        Texture2D player = Graphics.LoadTexture("C:.\\bear-walk1.png");// Load Player Image
-        Texture2D player2 = Graphics.LoadTexture("C:.\\bear-walk2.png");// Load Player Image
-        Texture2D player3 = Graphics.LoadTexture("C:.\\bear-walk3.png");// Load Player Image
-        Texture2D player4 = Graphics.LoadTexture("C:.\\bear-walk4.png");// Load Player Image
+        
+        Texture2D image1 = Graphics.LoadTexture("../../../Assets/bear-walk1.png");// Load Player Image
+        Texture2D image2 = Graphics.LoadTexture("../../../Assets/bear-walk2.png");// Load Player Image
+        Texture2D image3 = Graphics.LoadTexture("../../../Assets/bear-walk3.png");// Load Player Image
+        Texture2D image4 = Graphics.LoadTexture("../../../Assets/bear-walk4.png");// Load Player Image
+        Texture2D platform = Graphics.LoadTexture("../../../Assets/platform-long.png");// Load Platform Image
+        Texture2D Platform2 = Graphics.LoadTexture("../../../Assets/small-platform.png");// Load Platform Image
+      //  Directory.GetCurrentDirectory();
+        //Console.WriteLine(Directory.GetCurrentDirectory());
         //
-        Music music = Audio.LoadMusic("C:.\\2D Game music.MP3");// Load Music
+        Music music = Audio.LoadMusic("../../../Assets/2D Game music.MP3");// Load Music
 
-
-
-
+        Platform[] platforms = new Platform[]
+        {
+            new Platform(250, 355, 100, 10),
+            new Platform(290, 300, 100, 10)
+        };
         {
            bool isMoving = false; //Track if player is moving 
             if (Input.IsKeyboardKeyDown(KeyboardInput.Left))// If Left Arrow is Pressed
@@ -105,6 +123,7 @@ public class Game
                 yVelocity = 0; // Reset Player Y
             }
             //
+
             frameTimer += DeltaTime; // Add DeltaTime to FrameTimer
 
             if (frameTimer >= frameTime) // If FrameTimer is greater than or equal to FrameTime
@@ -131,17 +150,22 @@ public class Game
                 }
                 Texture2D currentPlayerTexture = currentFrame switch// Switch Statement for Current Frame
                  { 
-                    0 => player, // Frame 1 
-                    1 => player2,// Frame 2
-                    2 => player3,// Frame 3
-                    3 => player4,// Frame 4
-                     _ => player // Default 
+                    0 => image1, // Frame 1 
+                    1 => image2,// Frame 2
+                    2 => image3,// Frame 3
+                    3 => image4,// Frame 4
+                     _ => image1 // Default 
                  };
-                Music Sound = Audio.LoadMusic("C:.\\2D Game music.MP3");// Load Music not working wtf
+               
 
                 Graphics.Draw(currentPlayerTexture, playerX, playerY);// Draw Player Image
                                                                       //
                 Audio.Play(music);// Play Music
+                Graphics.Draw(platform, 250, 355);// Draw Platform Image
+                Graphics.Draw(Platform2, 290, 300);// Draw Platform Image
+
+                //Directory.GetCurrentDirectory();
+                //Console.WriteLine(Directory.GetCurrentDirectory());
                 Window.ClearBackground(Color.Clear);// Clear Background
                
 
