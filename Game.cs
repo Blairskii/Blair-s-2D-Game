@@ -14,9 +14,9 @@ public class Game
     float playerX = 50; // Player X
     float playerY = 350; // Player Y
     float playerSpeed = 7f; // Player Speed
-    float DeltaTime = 5f; // Delta Time
+    float DeltaTime = 2.5f; // Delta Time
     int currentFrame = 0; // Current Frame
-    float frameTime = 4f; // Time per Frame
+    float frameTime = 2f; // Time per Frame
     float frameTimer = 0f; // Timer for Frame
     //
     int windowWidth = 500; // Window Width
@@ -24,24 +24,17 @@ public class Game
 
     //Gravity
     float gravity = 1.3f;// Gravity
-    float jumpStrength = 14f;// Jump Strength
+    float jumpStrength = 15f;// Jump Strength
     float yVelocity = 1f;// Y Velocity
     bool isJumping = false;// Is Jumping
     bool isGrounded = false;// Is Grounded
+                            //
+                            // Define the platform positions and sizes (for simplicity, we're using arrays here).
+    float[] platformX = { 25, 100, 380, 200, 100, 0 }; // X positions of platforms
+    float[] platformY = { 305, 275, 295, 340, 350, 350 }; // Y positions of platforms
+    float[] platformWidth = { 100, 100, 100, 60, 60, 60 }; // Width of platforms
+    float[] platformHeight = { 20, 20, 20, 20, 20, 20 }; // Height of platforms
 
-    //
-    struct Platform
-    {
-        public float x,y, width, height;
-
-        public Platform(float x, float y, float width, float height)
-        {
-            this.x = x;
-            this.y = y;
-            this.width = width;
-            this.height = height;
-        }
-    }
 
     /// <summary>
     ///     Setup runs once before the game loop begins.
@@ -60,29 +53,21 @@ public class Game
     {
         //insert Background Image
 
-        Texture2D bg = Graphics.LoadTexture("../../../Assets/image001.png");
+        Texture2D bg = Graphics.LoadTexture("../../../Assets/MountainBG.png");
         Graphics.Scale = 1.3f; // Scale Background Image
         Graphics.Draw(bg, 0, 0);
-        // Draw Rectangle as ground plane 
 
-        // Draw a player graphic to the screen at position (200, 100).
-        
-        Texture2D image1 = Graphics.LoadTexture("../../../Assets/bear-walk1.png");// Load Player Image
-        Texture2D image2 = Graphics.LoadTexture("../../../Assets/bear-walk2.png");// Load Player Image
-        Texture2D image3 = Graphics.LoadTexture("../../../Assets/bear-walk3.png");// Load Player Image
-        Texture2D image4 = Graphics.LoadTexture("../../../Assets/bear-walk4.png");// Load Player Image
-        Texture2D platform = Graphics.LoadTexture("../../../Assets/platform-long.png");// Load Platform Image
-        Texture2D Platform2 = Graphics.LoadTexture("../../../Assets/small-platform.png");// Load Platform Image
-      //  Directory.GetCurrentDirectory();
-        //Console.WriteLine(Directory.GetCurrentDirectory());
+        //Load .png images
+        Texture2D image1 = Graphics.LoadTexture("../../../Assets/bear-walk1.png");// Load Player Image 1
+        Texture2D image2 = Graphics.LoadTexture("../../../Assets/bear-walk2.png");// Load Player Image 2
+        Texture2D image3 = Graphics.LoadTexture("../../../Assets/bear-walk3.png");// Load Player Image 3
+        Texture2D image4 = Graphics.LoadTexture("../../../Assets/bear-walk4.png");// Load Player Image 4
+        Texture2D platform = Graphics.LoadTexture("../../../Assets/platform-long.png");// Load Platform Image 1
+        Texture2D Platform2 = Graphics.LoadTexture("../../../Assets/small-platform.png");// Load Platform Image 2
+      
         //
-        Music music = Audio.LoadMusic("../../../Assets/2D Game music.MP3");// Load Music
+        Music music = Audio.LoadMusic("../../../Assets/2D Game music fin.WAV");// Load Music
 
-        Platform[] platforms = new Platform[]
-        {
-            new Platform(250, 355, 100, 10),
-            new Platform(290, 300, 100, 10)
-        };
         {
            bool isMoving = false; //Track if player is moving 
             if (Input.IsKeyboardKeyDown(KeyboardInput.Left))// If Left Arrow is Pressed
@@ -157,15 +142,14 @@ public class Game
                      _ => image1 // Default 
                  };
                
-
+                
                 Graphics.Draw(currentPlayerTexture, playerX, playerY);// Draw Player Image
                                                                       //
                 Audio.Play(music);// Play Music
-                Graphics.Draw(platform, 250, 355);// Draw Platform Image
-                Graphics.Draw(Platform2, 290, 300);// Draw Platform Image
+                Graphics.Draw(platform, 25, 305);// Draw Platform Image
+            
 
-                //Directory.GetCurrentDirectory();
-                //Console.WriteLine(Directory.GetCurrentDirectory());
+
                 Window.ClearBackground(Color.Clear);// Clear Background
                
 
