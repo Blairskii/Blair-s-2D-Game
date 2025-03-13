@@ -1,8 +1,5 @@
 ﻿// Include the namespaces (code libraries) you need below.
-using System;
-using System.IO;
-using System.Numerics;
-
+using Blair_s_2D_Game;
 
 // The namespace your code is in.
 namespace MohawkGame2D;
@@ -23,18 +20,19 @@ public class Game
     int windowHeight = 500;// Window Height
 
     //Gravity
-    float gravity = 1.3f;// Gravity
+    float gravity = 1.5f;// Gravity
     float jumpStrength = 15f;// Jump Strength
     float yVelocity = 1f;// Y Velocity
     bool isJumping = false;// Is Jumping
     bool isGrounded = false;// Is Grounded
                             //
-                            // Define the platform positions and sizes (for simplicity, we're using arrays here).
+                            // Define the platform positions and sizes 
     float[] platformX = { 25, 100, 380, 200, 100, 0 }; // X positions of platforms
     float[] platformY = { 305, 275, 295, 340, 350, 350 }; // Y positions of platforms
     float[] platformWidth = { 100, 100, 100, 60, 60, 60 }; // Width of platforms
     float[] platformHeight = { 20, 20, 20, 20, 20, 20 }; // Height of platforms
 
+    Platform[] platforms = new Platform[6]; // Create an array of platforms
 
     /// <summary>
     ///     Setup runs once before the game loop begins.
@@ -63,7 +61,7 @@ public class Game
         Texture2D image3 = Graphics.LoadTexture("../../../Assets/bear-walk3.png");// Load Player Image 3
         Texture2D image4 = Graphics.LoadTexture("../../../Assets/bear-walk4.png");// Load Player Image 4
         Texture2D platform = Graphics.LoadTexture("../../../Assets/platform-long.png");// Load Platform Image 1
-        Texture2D Platform2 = Graphics.LoadTexture("../../../Assets/small-platform.png");// Load Platform Image 2
+        Texture2D platform2 = Graphics.LoadTexture("../../../Assets/small-platform.png");// Load Platform Image 2
       
         //
         Music music = Audio.LoadMusic("../../../Assets/2D Game music fin.WAV");// Load Music
@@ -147,12 +145,9 @@ public class Game
                                                                       //
                 Audio.Play(music);// Play Music
                 Graphics.Draw(platform, 25, 305);// Draw Platform Image
-            
-
 
                 Window.ClearBackground(Color.Clear);// Clear Background
                
-
 
             } }
 
