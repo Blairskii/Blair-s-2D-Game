@@ -14,7 +14,7 @@ public class Game
     float playerSpeed = 7f; // Player Speed 
     float DeltaTime = 2.5f; // Delta Time 
     int currentFrame = 0; // Current Frame 
-    float frameTime = 2f; // Time per Frame 
+    float frameTime = 3f; // Time per Frame 
     float frameTimer = 0f; // Timer for Frame
     int windowWidth = 500; // Window Width 
     int windowHeight = 500; // Window Height 
@@ -25,7 +25,9 @@ public class Game
     float yVelocity = 1f; // Y Velocity 
     bool isJumping = false; // Is Jumping 
     bool isGrounded = false; // Is Grounded
-    //collisi
+    bool isMoving = false; // Is Moving
+
+    //collision
     float playerWidth = 32; // Player Width
     float playerHeight = 80; // Player Height
     float platformWidth = 32; // Platform Width
@@ -70,7 +72,7 @@ public class Game
 
     
 
-    //Move texture loading outside the update loop to improve performance
+   
     public void Update()
     {
         // Background Image 
@@ -91,6 +93,7 @@ public class Game
         if (Input.IsKeyboardKeyDown(KeyboardInput.Left)) // If Left Arrow is Pressed 
         {
             playerX -= playerSpeed; // Move Player Left 
+            
             isMoving = true; // Player is moving 
         }
         else if (Input.IsKeyboardKeyDown(KeyboardInput.Right)) // If Right Arrow is Pressed 
@@ -148,6 +151,7 @@ public class Game
             currentFrame = (currentFrame + 1) % 4; // Cycle through the frames 
         }
 
+
         // Player Wrapping 
         if (playerX > Window.Width) // If Player X exceeds Window Width 
         {
@@ -159,13 +163,18 @@ public class Game
         }
 
         // Set current player texture based on frame 
-        Texture2D currentPlayerTexture = currentFrame switch
+        Texture2D currentPlayerTexture = isMoving switch
         {
-            0 => image1, // Frame 1 
-            1 => image2, // Frame 2 
-            2 => image3, // Frame 3 
-            3 => image4, // Frame 4 
-            _ => image1 // Default 
+            true => currentFrame switch
+            {
+                0 => image1, // Frame 1 
+                1 => image2, // Frame 2 
+                2 => image3, // Frame 3 
+                3 => image4, // Frame 4 
+                _ => image1 // Default 
+            },
+            false => image2 // standing still
+
         };
 
         // Draw Player 
