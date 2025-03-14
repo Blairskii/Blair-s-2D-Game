@@ -23,4 +23,10 @@
     <PackageReference Include="Raylib-cs" Version="6.1.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Platform.cs">
+      <CustomToolNamespace>M</CustomToolNamespace>
+    </Compile>
+  </ItemGroup>
+
 </Project>

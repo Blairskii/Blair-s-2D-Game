@@ -107,6 +107,20 @@ public class Game
 
 
         }
+        foreach( var platform in platforms)
+        {
+            if (playerY + playerHeight <= platform.Y && playerY + playerHeight + yVelocity >= platform.Y &&
+            playerX + playerWidth > platform.X && playerX < platform.X + platformWidth)
+            {
+                // Player has landed on the platform, stop vertical velocity (gravity)
+                playerY = platform.Y - playerHeight; // Place the player just on top of the platform
+                yVelocity = 0; // Stop the downward velocity
+                isGrounded = true; // Player is grounded now
+                break; // Exit the loop after collision
+            }
+
+
+        }
 
         // Handle Ground Collision 
         if (playerY >= 350) // If Player Y is greater than or equal to 350 
@@ -116,6 +130,8 @@ public class Game
             isGrounded = true; // Set isGrounded to True 
             yVelocity = 0; // Reset Y Velocity 
         }
+        
+        
 
         // Frame Animation Logic 
         frameTimer += DeltaTime; // Add DeltaTime to FrameTimer 
