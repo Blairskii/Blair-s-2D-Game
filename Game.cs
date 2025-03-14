@@ -11,21 +11,22 @@ public class Game
 {
     float playerX = 50; // Player X 
     float playerY = 350; // Player Y 
-    float playerSpeed = 7f; // Player Speed 
+    float playerSpeed = 5f; // Player Speed 
     float DeltaTime = 2.5f; // Delta Time 
     int currentFrame = 0; // Current Frame 
-    float frameTime = 3f; // Time per Frame 
+    float frameTime = 5f; // Time per Frame 
     float frameTimer = 0f; // Timer for Frame
     int windowWidth = 500; // Window Width 
     int windowHeight = 500; // Window Height 
 
     // Gravity
     float gravity = 1.5f; // Gravity 
-    float jumpStrength = 15f; // Jump Strength 
+    float jumpStrength = 16f; // Jump Strength 
     float yVelocity = 1f; // Y Velocity 
     bool isJumping = false; // Is Jumping 
     bool isGrounded = false; // Is Grounded
     bool isMoving = false; // Is Moving
+    
 
     //collision
     float playerWidth = 32; // Player Width
@@ -41,7 +42,7 @@ public class Game
     {
         Window.SetTitle("Blair's 2D Game"); // Set Title 
         Window.SetSize(500, 500); // Set Window Size 
-        Window.TargetFPS = 30; // Set Target FPS 
+        Window.TargetFPS = 60; // Set Target FPS 
         // Music 
         Music music = Audio.LoadMusic("../../../Assets/2D Game music fin.WAV"); // Load Music 
         // Play Music 
@@ -54,13 +55,18 @@ public class Game
 
         platforms = new Platform[] // Initialize platforms array 
         {
-                new Platform(65, 400,  platformTexture), // Platform 1
+                new Platform(250, 400,  platformTexture), // Platform 1
                 new Platform(125, 340, platformTexture), // Platform 2
-                new Platform(185, 300, platformTexture), // Platform 3
-                new Platform(250, 250, platformTexture), // Platform 4
-                new Platform(350, 250, platformTexture), // Platform 5
-                new Platform(475, 275, platformTexture), // Platform 6
-                new Platform(0, 200, platformTexture), // Platform 7
+                new Platform(55, 300, platformTexture), // Platform 3
+                new Platform(245, 275, platformTexture), // Platform 4
+                new Platform(350, 235, platformTexture), // Platform 5
+                new Platform(455, 275, platformTexture), // Platform 6
+                new Platform(15, 200, platformTexture), // Platform 7
+                new Platform(200, 150, platformTexture), // Platform 8
+                new Platform(250, 50, platformTexture), // Platform 9
+                new Platform(450,125, platformTexture), // Platform 10 
+                new Platform(350, 50, platformTexture), // Platform 11
+               
                 //
                
 
@@ -95,11 +101,13 @@ public class Game
             playerX -= playerSpeed; // Move Player Left 
             
             isMoving = true; // Player is moving 
+            
         }
         else if (Input.IsKeyboardKeyDown(KeyboardInput.Right)) // If Right Arrow is Pressed 
         {
             playerX += playerSpeed; // Move Player Right 
             isMoving = true; // Player is moving 
+
         }
 
         // Jumping and Gravity 
