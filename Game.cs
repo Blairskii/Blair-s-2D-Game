@@ -25,6 +25,11 @@ public class Game
     float yVelocity = 1f; // Y Velocity 
     bool isJumping = false; // Is Jumping 
     bool isGrounded = false; // Is Grounded
+    //collisi
+    float playerWidth = 54; // Player Width
+    float playerHeight = 63; // Player Height
+    float platformWidth = 32; // Platform Width
+    float platformHeight = 16; // Platform Height
 
     // Define platforms array 
     Platform[] platforms;
