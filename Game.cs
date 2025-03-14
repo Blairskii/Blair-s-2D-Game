@@ -26,10 +26,10 @@ public class Game
     bool isJumping = false; // Is Jumping 
     bool isGrounded = false; // Is Grounded
     //collisi
-    float playerWidth = 54; // Player Width
-    float playerHeight = 63; // Player Height
+    float playerWidth = 32; // Player Width
+    float playerHeight = 80; // Player Height
     float platformWidth = 32; // Platform Width
-    float platformHeight = 16; // Platform Height
+    float platformHeight = 25; // Platform Height
 
     // Define platforms array 
     Platform[] platforms;
@@ -49,6 +49,7 @@ public class Game
         //  Initialize platforms here and load texture
         Texture2D platformTexture = Graphics.LoadTexture("../../../Assets/platform-long.png"); // Load the platform texture 
 
+
         platforms = new Platform[] // Initialize platforms array 
         {
                 new Platform(65, 400,  platformTexture), // Platform 1
@@ -58,10 +59,16 @@ public class Game
                 new Platform(350, 250, platformTexture), // Platform 5
                 new Platform(475, 275, platformTexture), // Platform 6
                 new Platform(0, 200, platformTexture), // Platform 7
-                
-                
+                //
+               
+
+
         };
+
+        
     }
+
+    
 
     //Move texture loading outside the update loop to improve performance
     public void Update()
