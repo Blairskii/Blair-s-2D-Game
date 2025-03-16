@@ -26,7 +26,10 @@ public class Game
     bool isJumping = false; // Is Jumping 
     bool isGrounded = false; // Is Grounded
     bool isMoving = false; // Is Moving
-    
+
+    //end of game 
+    bool isGameOver = false; // Game Over
+
 
     //collision
     float playerWidth = 32; // Player Width
@@ -62,8 +65,8 @@ public class Game
                 new Platform(350, 235, platformTexture), // Platform 5
                 new Platform(455, 275, platformTexture), // Platform 6
                 new Platform(15, 200, platformTexture), // Platform 7
-                new Platform(200, 150, platformTexture), // Platform 8
-                new Platform(250, 50, platformTexture), // Platform 9
+                new Platform(50,50, platformTexture), // Platform 8
+                new Platform(250, 150, platformTexture), // Platform 9 //winner platform
                 new Platform(450,125, platformTexture), // Platform 10 
                 new Platform(350, 50, platformTexture), // Platform 11
                
@@ -81,12 +84,16 @@ public class Game
    
     public void Update()
     {
+        Window.ClearBackground(Color.Clear); // Clear Background 
         // Background Image 
         Texture2D bg = Graphics.LoadTexture("../../../Assets/MountainBG.png");
+        Texture2D winner = Graphics.LoadTexture("../../../Assets/winner.png"); // Load Winner Image
         Graphics.Scale = 1.3f; // Scale Background Image 
         Graphics.Draw(bg, 0, 0);
+        //
+        Texture2D flag = Graphics.LoadTexture("../../../Assets/flag.png"); // Load Flag Image
 
-        //Load player textures only once, outside the Update loop
+        //Load player textures
         Texture2D image1 = Graphics.LoadTexture("../../../Assets/bear-walk1.png"); // Load Player Image 1 
         Texture2D image2 = Graphics.LoadTexture("../../../Assets/bear-walk2.png"); // Load Player Image 2 
         Texture2D image3 = Graphics.LoadTexture("../../../Assets/bear-walk3.png"); // Load Player Image 3 
@@ -158,7 +165,7 @@ public class Game
             frameTimer = 0; // Reset FrameTimer 
             currentFrame = (currentFrame + 1) % 4; // Cycle through the frames 
         }
-
+      
 
         // Player Wrapping 
         if (playerX > Window.Width) // If Player X exceeds Window Width 
@@ -169,6 +176,15 @@ public class Game
         {
             playerX = Window.Width; // Reset Player X to right side of screen 
         }
+
+        // Check if the player reaches platform 9 (winner platform)
+        if (playerX >= 240 && playerX <= 260 && playerY >= 65 && playerY <= 75 && isGrounded) // If Player reaches the winner platform 
+        {
+            isGameOver = true; // Set Game Over to True
+            isGrounded = true; // Set isGrounded to True
+        }
+        //break; // Exit the loop after collision
+
 
         // Set current player texture based on frame 
         Texture2D currentPlayerTexture = isMoving switch
@@ -187,16 +203,33 @@ public class Game
 
         // Draw Player 
         Graphics.Draw(currentPlayerTexture, playerX, playerY);
+        
+
+        
 
         // Draw all platforms here by looping through the array
         foreach (var platform in platforms) // Iterate over each platform 
         {
             Graphics.Draw(platform.Texture, platform.X, platform.Y); // Draw platform 
         }
-
         
 
-        // Clear Background 
-        Window.ClearBackground(Color.Clear); // Clear Background 
+        if (isGameOver)
+        {
+            Graphics.Draw(winner, 0, 0); // Draw winner screen 
+            Graphics.Scale = 1.3f; // Scale Background Image
+           
+        }
+        
+        {
+            Graphics.Scale = 0.5f; // Scale Flag Image
+            Graphics.Draw(flag, 250, 116); // Draw Flag Image
+        }
+        
+        
+       
+        
+
+
     }
 }
