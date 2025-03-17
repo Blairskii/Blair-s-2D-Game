@@ -9,6 +9,7 @@ namespace MohawkGame2D;
 /// </summary>
 public class Game
 {
+    
     float playerX = 50; // Player X 
     float playerY = 350; // Player Y 
     float playerSpeed = 5f; // Player Speed 
@@ -25,7 +26,7 @@ public class Game
     float yVelocity = 1f; // Y Velocity 
     bool isJumping = false; // Is Jumping 
     bool isGrounded = false; // Is Grounded
-    bool isMoving = false; // Is Moving
+    
 
     //end of game 
     bool isGameOver = false; // Game Over
@@ -43,6 +44,8 @@ public class Game
     // Setup method 
     public void Setup()
     {
+        
+        //
         Window.SetTitle("Blair's 2D Game"); // Set Title 
         Window.SetSize(500, 500); // Set Window Size 
         Window.TargetFPS = 60; // Set Target FPS 
@@ -183,7 +186,7 @@ public class Game
             isGameOver = true; // Set Game Over to True
             isGrounded = true; // Set isGrounded to True
         }
-        //break; // Exit the loop after collision
+        
 
 
         // Set current player texture based on frame 
@@ -220,7 +223,7 @@ public class Game
             Graphics.Scale = 1.3f; // Scale Background Image
            
         }
-        
+        else
         {
             Graphics.Scale = 0.5f; // Scale Flag Image
             Graphics.Draw(flag, 250, 116); // Draw Flag Image
