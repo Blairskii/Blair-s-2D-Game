@@ -1,7 +1,5 @@
 ﻿using System.Numerics;
 
-
-// GameController.cs
 namespace MohawkGame2D
 {
     public class Restart
@@ -9,28 +7,28 @@ namespace MohawkGame2D
         public bool IsGameOver { get; set; }
 
         // Constructor
-        public Restart()
+        public Restart(bool gameOver = false)
         {
-            IsGameOver = false;  // Game starts as not over
+            IsGameOver = gameOver;  // Game starts as not over
         }
+
+        // Method to check for restart input
         public void CheckRestart()
         {
-            if (IsGameOver)
+            if (IsGameOver && KeyboardInput.IsKeyDown('R'))
             {
-                if (Input.IsKeyboardKeyDown(KeyboardInput.R))
-                {
-                    IsGameOver = false;
-                }
+                IsGameOver = false;
             }
         }
     }
+
+    // Keyboard Input Handling Class
+    public static class KeyboardInput
+    {
+        public static bool IsKeyDown(char key)
+        {
+            // This is a placeholder. You can integrate this with Raylib or Unity's input system.
+            return false;
+        }
+    }
 }
-
- 
-                                 
-        
-            
-
-
-
-        
