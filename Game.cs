@@ -34,7 +34,7 @@ public class Game
 
 
     
-    float playerWidth = 32; // Player Width
+    float playerWidth = 30; // Player Width
     float playerHeight = 80; // Player Height
     float platformWidth = 32; // Platform Width
     float platformHeight = 25; // Platform Height
