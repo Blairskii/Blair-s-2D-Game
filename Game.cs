@@ -10,8 +10,8 @@ namespace MohawkGame2D;
 public class Game
 {
     
-    float playerX = 50; // Player X 
-    float playerY = 350; // Player Y 
+    public static float playerX = 50; // Player X 
+    public static float playerY = 350; // Player Y 
     float playerSpeed = 5f; // Player Speed 
     float DeltaTime = 2.5f; // Delta Time 
     int currentFrame = 0; // Current Frame 
@@ -30,7 +30,7 @@ public class Game
     
 
     //end of game 
-    bool isGameOver = false; // Game Over
+    public static bool isGameOver = false; // Game Over
 
 
     
@@ -79,7 +79,7 @@ public class Game
 
 
         };
-
+        
         
     }
 
@@ -103,7 +103,8 @@ public class Game
         Texture2D image3 = Graphics.LoadTexture("../../../Assets/bear-walk3.png"); // Load Player Image 3 
         Texture2D image4 = Graphics.LoadTexture("../../../Assets/bear-walk4.png"); // Load Player Image 4 
 
-       
+        
+
         bool isMoving = false; // Track if player is moving 
 
         // Player Movement 
@@ -216,9 +217,9 @@ public class Game
         // Draw Player 
         Graphics.Draw(currentPlayerTexture, playerX, playerY);
 
-        
 
 
+      
         // Draw all platforms here by looping through the array
         foreach (var platform in platforms) // Iterate over each platform 
         {
@@ -238,9 +239,9 @@ public class Game
             Graphics.Draw(flag, 250, 116); // Draw Flag Image
         }
         
-        
-       
-        
+        Restartgame.CheckRestart();
+
+
 
 
     }

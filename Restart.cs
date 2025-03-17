@@ -1,34 +1,42 @@
 ﻿using System.Numerics;
+using System.Security.Cryptography.X509Certificates;
 
+
+// GameController.cs
 namespace MohawkGame2D
 {
-    public class Restart
+    public class Restartgame
     {
-        public bool IsGameOver { get; set; }
-
         // Constructor
-        public Restart(bool gameOver = false)
+        public Restartgame(bool gameOver = false)
         {
-            IsGameOver = gameOver;  // Game starts as not over
+           Game.isGameOver = gameOver;  // Game starts as not over
         }
-
-        // Method to check for restart input
-        public void CheckRestart()
+        public static void CheckRestart()
         {
-            if (IsGameOver && KeyboardInput.IsKeyDown('R'))
-            {
-                IsGameOver = false;
+            // Check if game is over
+            if (Game.isGameOver)
+            { // If game is over
+                if (Input.IsKeyboardKeyPressed(KeyboardInput.R))
+                {
+                    // Restart the game 
+                    Game.playerX = 50; // Set player X position
+                    Game.playerY = 350; // Set player Y position
+                    Game.isGameOver = false; // Set game over to false
+                } 
+                
+                
+                
             }
         }
-    }
-
-    // Keyboard Input Handling Class
-    public static class KeyboardInput
-    {
-        public static bool IsKeyDown(char key)
-        {
-            // This is a placeholder. You can integrate this with Raylib or Unity's input system.
-            return false;
-        }
+        
+            
+            
+                
+                
+                    
+                
+            
+        
     }
 }
