@@ -30,8 +30,9 @@ namespace MohawkGame2D
         public void RestartGame()
         {
             IsGameOver = false;  // Set the game state to not over
-                                 // Reset game state
-              // Reset player X position
+                                 
+        
+            
 
 
 

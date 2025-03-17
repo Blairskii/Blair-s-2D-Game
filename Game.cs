@@ -19,6 +19,7 @@ public class Game
     float frameTimer = 0f; // Timer for Frame
     int windowWidth = 500; // Window Width 
     int windowHeight = 500; // Window Height 
+    
 
     // Gravity
     float gravity = 1.5f; // Gravity 
@@ -32,7 +33,7 @@ public class Game
     bool isGameOver = false; // Game Over
 
 
-    //collision
+    
     float playerWidth = 32; // Player Width
     float playerHeight = 80; // Player Height
     float platformWidth = 32; // Platform Width
@@ -65,7 +66,7 @@ public class Game
                 new Platform(125, 340, platformTexture), // Platform 2
                 new Platform(55, 300, platformTexture), // Platform 3
                 new Platform(245, 275, platformTexture), // Platform 4
-                new Platform(350, 235, platformTexture), // Platform 5
+                new Platform(350, 55, platformTexture), // Platform 5
                 new Platform(455, 275, platformTexture), // Platform 6
                 new Platform(15, 200, platformTexture), // Platform 7
                 new Platform(50,50, platformTexture), // Platform 8
@@ -135,7 +136,10 @@ public class Game
 
 
         }
-        foreach( var platform in platforms)
+        //platform collision detection
+        bool isOnAnyPlatform = false;
+        
+        foreach ( var platform in platforms)
         {
             if (playerY + playerHeight <= platform.Y && playerY + playerHeight + yVelocity >= platform.Y &&
             playerX + playerWidth > platform.X && playerX < platform.X + platformWidth)
@@ -144,10 +148,15 @@ public class Game
                 playerY = platform.Y - playerHeight; // Place the player just on top of the platform
                 yVelocity = 0; // Stop the downward velocity
                 isGrounded = true; // Player is grounded now
+                isOnAnyPlatform = true; // Player is on a platform
                 break; // Exit the loop after collision
             }
 
 
+        } 
+        if (!isOnAnyPlatform)
+        {
+            isGrounded = false;
         }
 
         // Handle Ground Collision 
@@ -181,7 +190,7 @@ public class Game
         }
 
         // Check if the player reaches platform 9 (winner platform)
-        if (playerX >= 240 && playerX <= 260 && playerY >= 65 && playerY <= 75 && isGrounded) // If Player reaches the winner platform 
+        if (playerX >= 220 && playerX <= 260 && playerY >= 65 && playerY <= 75 && isGrounded) // If Player reaches the winner platform 
         {
             isGameOver = true; // Set Game Over to True
             isGrounded = true; // Set isGrounded to True
@@ -206,9 +215,9 @@ public class Game
 
         // Draw Player 
         Graphics.Draw(currentPlayerTexture, playerX, playerY);
-        
 
         
+
 
         // Draw all platforms here by looping through the array
         foreach (var platform in platforms) // Iterate over each platform 
